@@ -20,9 +20,9 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Move to android folder
-      run: cd android
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew assembleRelease
+      run: chmod +x android/gradlew
+    - name: Build application
+      run: |
+             cd android
+             ./gradlew assembleRelease
