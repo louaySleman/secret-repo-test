@@ -19,7 +19,17 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: gradle
+    - name: Setup Node  
+      uses: actions/setup-node@v3
+      with:
+          node-version: '18'
+          cache: 'yarn'
 
+    - name: Run Yarn Install
+      run: |
+             npm i -g corepack
+             yarn install
+             
     - name: Grant execute permission for gradlew
       run: chmod +x android/gradlew
     - name: Build application
