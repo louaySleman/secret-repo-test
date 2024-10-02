@@ -2,6 +2,12 @@ apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
+project.ext.envConfigFiles = [
+        dev: ".env",
+        prod: ".env.prod",
+]
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 /**
  * This is the configuration block to customize your React Native Android app.
  * By default you don't need to apply any configuration, just uncomment the lines you need.
@@ -79,11 +85,8 @@ android {
 
     namespace "com.awesomeproject"
     defaultConfig {
-        applicationId "com.awesomeproject"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
     }
     signingConfigs {
         debug {
@@ -103,6 +106,26 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+    flavorDimensions "env"
+    productFlavors {
+        dev {
+            versionCode 1
+            versionName "1.0"
+            signingConfig signingConfigs.debug
+            applicationId "com.awesomeproject"
+            resValue "string", "build_config_package", "com.awesomeproject"
+            manifestPlaceholders = [
+                    mainActivity: "com.awesomeproject.MainActivity"
+            ]
+        }
+        prod {
+            versionCode 12
+            versionName "3.2.0"
+            signingConfig signingConfigs.debug
+            applicationId "com.awesomeproject"
+            resValue "string", "build_config_package", "com.awesomeproject.android"
         }
     }
 }
