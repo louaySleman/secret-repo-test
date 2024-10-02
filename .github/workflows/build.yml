@@ -108,7 +108,7 @@ jobs:
       - name: Build iOS
         run: |
           xcodebuild -workspace ios/AwesomeProject.xcworkspace \
-          -scheme YourApp \
+          -scheme AwesomeProject \
           -sdk iphonesimulator \
           -configuration Release \
           -destination 'platform=iOS Simulator,name=iPhone 14' \
