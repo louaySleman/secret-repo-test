@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  android-build:
 
     runs-on: ubuntu-latest
 
@@ -82,3 +82,47 @@ jobs:
         with:
           name: app-prod-release.apk
           path: android/app/build/outputs/apk/prod/release/app-prod-release.apk
+
+  ios-build:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install CocoaPods
+        run: |
+          sudo gem install cocoapods
+
+      - name: Install Dependencies
+        run: |
+          yarn install
+          cd ios
+          pod install
+
+      - name: Build iOS
+        run: |
+          xcodebuild -workspace ios/AwesomeProject.xcworkspace \
+          -scheme AwesomeProject \
+          -configuration Release \
+          -sdk iphoneos \
+          -archivePath $PWD/build/AwesomeProject.xcarchive \
+          clean archive
+
+      - name: Export IPA
+        run: |
+          xcodebuild -exportArchive \
+          -archivePath $PWD/build/AwesomeProject.xcarchive \
+          -exportOptionsPlist ios/exportOptions.plist \
+          -exportPath $PWD/build/AwesomeProject
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: app.ipa
+          path: ios/build/AwesomeProject/AwesomeProject.ipa
