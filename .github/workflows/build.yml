@@ -108,12 +108,12 @@ jobs:
       - name: Build iOS
         run: |
           xcodebuild -workspace ios/AwesomeProject.xcworkspace \
-          -scheme AwesomeProject \
+          -scheme YourApp \
+          -sdk iphonesimulator \
           -configuration Release \
-          CODE_SIGNING_ALLOWED=NO \
-          -sdk iphoneos \
-          -archivePath $PWD/build/AwesomeProject.xcarchive \
-          clean archive
+          -destination 'platform=iOS Simulator,name=iPhone 14' \
+          clean build \
+          -verbose
 
       - name: Locate the .app file
         run: |
