@@ -125,7 +125,10 @@ android {
             versionName "3.2.0"
             signingConfig signingConfigs.debug
             applicationId "com.awesomeproject"
-            resValue "string", "build_config_package", "com.awesomeproject.android"
+            resValue "string", "build_config_package", "com.awesomeproject"
+            manifestPlaceholders = [
+                    mainActivity: "com.awesomeproject.MainActivity"
+            ]
         }
     }
 }
