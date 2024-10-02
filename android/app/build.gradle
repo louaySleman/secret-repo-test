@@ -121,7 +121,7 @@ android {
             ]
         }
         prod {
-            versionCode 12
+            versionCode 1
             versionName "3.2.0"
             signingConfig signingConfigs.debug
             applicationId "com.awesomeproject"
