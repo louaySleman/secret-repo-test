@@ -34,7 +34,7 @@ jobs:
 
       - name: Create .env file
         run: |
-          echo "TEST_SDK_KEY=${{ secrets.TEST_SDK_KEY }}" >> .env
+          echo "TEST_SDK_KEY=${{ secrets.TEST_SDK_KEY_DEV }}" >> .env
 
       - name: Create .env.prod file
         run: |
