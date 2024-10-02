@@ -36,8 +36,14 @@ jobs:
       run: |
              cd android
              ./gradlew assembleDevRelease
-    - name: Upload APK
+             ./gradlew assembleProdRelease
+    - name: Upload DEV APK
       uses: actions/upload-artifact@v3
       with:
-        name: app-release.apk
-        path: android/app/build/outputs/apk/dev/release/app-release.apk
+        name: app-dev-release.apk
+        path: android/app/build/outputs/apk/dev/release/app-dev-release.apk
+    - name: Upload PROD APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-prod-release.apk
+        path: android/app/build/outputs/apk/prod/release/app-prod-release.apk
