@@ -74,6 +74,9 @@ function App(): React.JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <Section title="Current environment">
+            Current Environment is <Text style={styles.highlight}>{Config.ENV}</Text>
+          </Section>
           <Section title="Current config">
             Current config token is <Text style={styles.highlight}>{Config.TEST_SDK_KEY}</Text>
           </Section>
