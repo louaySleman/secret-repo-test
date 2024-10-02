@@ -110,6 +110,7 @@ jobs:
           xcodebuild -workspace ios/AwesomeProject.xcworkspace \
           -scheme AwesomeProject \
           -configuration Release \
+          CODE_SIGNING_ALLOWED=NO \
           -sdk iphoneos \
           -archivePath $PWD/build/AwesomeProject.xcarchive \
           clean archive
