@@ -115,15 +115,8 @@ jobs:
           -archivePath $PWD/build/AwesomeProject.xcarchive \
           clean archive
 
-      - name: Export IPA
-        run: |
-          xcodebuild -exportArchive \
-          -archivePath $PWD/build/AwesomeProject.xcarchive \
-          -exportOptionsPlist ios/exportOptions.plist \
-          -exportPath $PWD/build/AwesomeProject
-
-      - name: Upload IPA
+      - name: Upload .app for Simulator
         uses: actions/upload-artifact@v4
         with:
-          name: app.ipa
-          path: ios/build/AwesomeProject/AwesomeProject.ipa
+          name: app-simulator.app
+          path: ios/build/AwesomeProject/Build/Products/Release-iphonesimulator/AwesomeProject.app
